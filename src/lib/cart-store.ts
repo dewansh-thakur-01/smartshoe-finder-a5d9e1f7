@@ -27,5 +27,8 @@ export const cartStore = {
   subscribe(l: () => void) { listeners.add(l); return () => listeners.delete(l); },
 };
 
+const EMPTY_CART: CartItem[] = [];
+const getServerSnapshot = () => EMPTY_CART;
+
 export const useCart = () =>
-  useSyncExternalStore(cartStore.subscribe, cartStore.get, () => [] as CartItem[]);
+  useSyncExternalStore(cartStore.subscribe, cartStore.get, getServerSnapshot);
